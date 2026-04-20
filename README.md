@@ -147,6 +147,26 @@ and both together gave R² = 0.88 with no improvement.
 This confirmed multicollinearity between the two features,
 so `age_smoker` was dropped.
 
+## Why Cross-Validation Mattered
+
+Without cross-validation, the test R² before feature engineering
+looked strong at **0.8069**, which could give the impression that
+the model was already performing well. Cross-validation revealed
+the truth — the real generalization performance was only **0.7258**,
+meaning the single test split gave an overly optimistic result
+by pure luck of how the data was divided.
+
+This 8% gap between test R² and CV Mean R² was the key signal
+that feature engineering was necessary. After feature engineering,
+the gap closed significantly — test R² of 0.9092 vs CV Mean R²
+of 0.8511 — confirming that the model genuinely improved and
+was not just getting lucky on a favorable split.
+
+This is exactly why cross-validation should always be used
+alongside a single train/test split — it gives you the honest
+picture of your model's real performance.
+
+
 ## Key Findings
 
 - `smoker` is by far the most important feature — smoking
